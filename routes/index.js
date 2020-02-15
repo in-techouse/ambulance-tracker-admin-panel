@@ -13,15 +13,14 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-/* GET home page. */
 router.get("/", function(req, res) {
   if (req.session.isAdmin) {
     res.redirect("/admin");
   }
-  res.render("pages/login", { error: "" });
+  res.render("pages/auth/login", { error: "" });
 });
 
-router.post("/login", function(req, res) {
+router.post("/", function(req, res) {
   if (req.session.isAdmin) {
     res.redirect("/admin");
   }
@@ -45,7 +44,7 @@ router.post("/login", function(req, res) {
             data.val() === null ||
             data.val === undefined
           ) {
-            res.render("pages/login", {
+            res.render("pages/auth/login", {
               error: "You are not authorized to login here"
             });
           } else {
@@ -57,13 +56,42 @@ router.post("/login", function(req, res) {
           }
         })
         .catch(e => {
-          res.render("pages/login", {
+          res.render("pages/auth/login", {
             error: "You are not authorized to login here"
           });
         });
     })
     .catch(e => {
-      res.render("pages/login", { error: e.message });
+      res.render("pages/auth/login", { error: e.message });
+    });
+});
+
+router.get("/forgotPassword", function(req, res) {
+  if (req.session.isAdmin) {
+    res.redirect("/admin");
+  }
+  res.render("pages/auth/forgotPassword", { error: "", success: "" });
+});
+
+router.post("/forgotPassword", function(req, res) {
+  if (req.session.isAdmin) {
+    res.redirect("/admin");
+  }
+  firebase
+    .auth()
+    .sendPasswordResetEmail(req.body.email)
+    .then(r => {
+      res.render("pages/auth/forgotPassword", {
+        error: "",
+        success:
+          "Instructions to RESET your password has been sent to your email."
+      });
+    })
+    .catch(e => {
+      res.render("pages/auth/forgotPassword", {
+        error: e.message,
+        success: ""
+      });
     });
 });
 

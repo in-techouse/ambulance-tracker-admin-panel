@@ -1,0 +1,64 @@
+<% extend ('../../layout')%>
+
+
+<div class="row">
+    <div class="col-lg-12 main-chart">
+        <div class="row mt">
+
+            <div class="col-md-6 col-sm-6 mb">
+                <a href="/admin/users">
+                    <div class="grey-panel pn donut-chart">
+                        <div class="grey-header">
+                            <h3>USERS</h3>
+                        </div>
+                        <div class="col-sm-12 col-xs-12">
+                            <h1><%= count.users %></h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-sm-6 mb">
+                <a href="/admin/drivers">
+                    <div class="grey-panel pn donut-chart">
+                        <div class="grey-header">
+                            <h3>DRIVERS</h3>
+                        </div>
+                        <div class="col-sm-12 col-xs-12">
+                            <h1><%= count.drivers %></h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-sm-6 mb">
+                <a href="/admin/ambulances">
+                    <div class="grey-panel pn donut-chart">
+                        <div class="grey-header">
+                            <h3>AMBULANCES</h3>
+                        </div>
+                        <div class="col-sm-12 col-xs-12">
+                            <h1><%= count.ambulances %></h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-sm-6 mb">
+                <a href="#">
+                    <div class="grey-panel pn donut-chart">
+                        <div class="grey-header">
+                            <h3>BOOKINGS</h3>
+                        </div>
+                        <div class="col-sm-12 col-xs-12">
+                            <h1><%= count.bookings %></h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+        <!-- /row -->
+    </div>
+</div>
+<!-- /row -->

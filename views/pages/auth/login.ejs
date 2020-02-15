@@ -1,0 +1,29 @@
+<% extend ('../../auth_layout')%>
+<div id="login-page">
+    <div class="container">
+        <form class="form-login" action="/" method="POST">
+            <h2 class="form-login-heading">sign in now</h2>
+            <div class="login-wrap">
+                <%if(error!=""){ %>
+                <div class="form-group form-success-gone">
+                    <div class="alert alert-danger">
+                        <%- error%>
+                    </div>
+                </div>
+                <% } %>
+                <input name="email" type="email" class="form-control" placeholder="EMAIL" autofocus required>
+                <br>
+                <input name="password" type="password" class="form-control" placeholder="PASSWORD" minlength="6">
+                <label class="checkbox">
+                    <span class="pull-right">
+                        <a href="/forgotPassword"> Forgot Password?</a>
+                    </span>
+                </label>
+                <br /><br />
+                <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i>
+                    SIGN IN</button>
+                <hr>
+            </div>
+        </form>
+    </div>
+</div>

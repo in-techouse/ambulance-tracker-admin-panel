@@ -1,4 +1,4 @@
-<% extend ('../layout')%>
+<% extend ('../../layout')%>
 <div class="row" style="padding:20px ;">
     <div class="col-md-12">
         <div class="responsive-table">
@@ -7,7 +7,6 @@
                     <tr>
                         <th>Image</th>
                         <th>Name</th>
-                        <th>Driver ID</th>
                         <th>Email</th>
                         <th>License Number</th>
                         <th>Phone Number</th>
@@ -20,19 +19,20 @@
                     <tr>
                         <td>
                             <% if (driver.val().image && driver.val().image.length > 0) {%>
-                            <img src="<%= driver.val().image %>" class="img-circle avatar" alt="<%= driver.val().firstName%>" style="width: 80px; height: 80px;"/>
+                            <img src="<%= driver.val().image %>" class="img-circle avatar"
+                                alt="<%= driver.val().firstName%>" style="width: 80px; height: 80px;" />
                             <% } else {%>
-                            <img src="/public/img/avatar.jpg" class="img-circle avatar" alt="<%= driver.val().firstName%>" style="width: 80px; height: 80px;"/>
+                            <img src="/public/img/user.jpg" class="img-circle avatar" alt="<%= driver.val().firstName%>"
+                                style="width: 80px; height: 80px;" />
                             <%}%>
                         </td>
                         <td><%=driver.val().firstName%> <%=driver.val().lastName%></td>
-                        <td><%=driver.val().id %></td>
                         <td><%=driver.val().email %></td>
                         <td><%=driver.val().licenseNumber%></td>
-                        <td><%=driver.val().phoneNumber%></td>
-                        <td><a href="/admin/editdriver?id=<%= driver.val().id%>"
+                        <td><%=driver.val().phone%></td>
+                        <td><a href="/admin/editdriver?id=<%= driver.val().phone%>"
                                 class="btn btn-warning btn-block">Edit</a></td>
-                        <td><a href="/admin/driverdetail?id=<%= driver.val().id%>"
+                        <td><a href="/admin/driverdetail?id=<%= driver.val().phone%>"
                                 class="btn btn-primary btn-block">Detail</a>
                         </td>
 

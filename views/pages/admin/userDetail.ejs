@@ -1,0 +1,54 @@
+<% extend ('../../layout')%>
+
+<div class="row">
+    <div class="col-lg-12 main-chart">
+        <div class="col-lg-3 col-md-3 col-sm-3 mb"></div>
+        <div class="col-lg-6 col-md-6 col-sm-6 mb">
+            <div class="content-panel pn">
+                <% if (user.val().image && user.val().image.length > 0){%>
+                <div id="spotify"
+                    style="background: url('<%= user.val().image%>'); background-attachment: relative; background-size: 100%; -webkit-background-size: 100%;">
+                    <%} else {%>
+                    <div id="spotify">
+                        <%}%>
+                    <div class="sp-title">
+                        <h3><%= user.val().firstName %> <%= user.val().lastName %></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 mb"></div>
+    </div>
+    <div class="col-lg-12 main-chart" style="margin-top: 0px; padding-top: 0px;">
+        <div class="col-lg-3 col-md-3 col-sm-3 mb"></div>
+        <div class="col-lg-6 col-md-6 col-sm-6 mb">
+            <div class="content-panel pn" style="padding: 10px;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3 class="text-left font-weight-bold">Name</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <h3 class="text-right"><%= user.val().firstName %> <%= user.val().lastName %></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3 class="text-left font-weight-bold">Phone Number</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <h3 class="text-right"><%= user.val().phone %></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3 class="text-left font-weight-bold">Email</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <h3 class="text-right"><%= user.val().email %></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 mb"></div>
+    </div>
+</div>

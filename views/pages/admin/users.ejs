@@ -1,0 +1,34 @@
+<% extend ('../../layout')%>
+
+<div class="row">
+    <div class="col-lg-12 main-chart">
+        <% users.forEach(user => {%>
+        <div class="col-lg-4 col-md-4 col-sm-4 mb">
+            <div class="content-panel pn">
+                <% if (user.val().image && user.val().image.length > 0){%>
+                    <div id="spotify" style="background: url('<%= user.val().image%>'); background-attachment: relative; background-size: 100%; -webkit-background-size: 100%;">
+                <%} else {%>
+                    <div id="spotify">
+                <%}%>
+                    <div class="sp-title">
+                        <h3><%= user.val().firstName %> <%= user.val().lastName %></h3>
+                    </div>
+                </div>
+                <p class="followers">
+                    <!-- <div class="row" style="padding-top: 10px; padding-bottom: 30px;"> -->
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <a class="btn btn-primary btn-block" href="/admin/userDetail?id=<%= user.val().phone%>">SHOW DETAIL</a>
+                        </div>
+                        <!-- <div class="col-md-2"></div>
+                        <div class="col-md-5">
+                            <a class="btn btn-warning btn-block" href="#">EDIT DETAIL</a>
+                        </div> -->
+                        <div class="col-md-3"></div>
+                    <!-- </div> -->
+                </p>
+            </div>
+        </div>
+        <%})%>
+    </div>
+</div>

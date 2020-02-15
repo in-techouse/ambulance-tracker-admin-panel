@@ -1,0 +1,63 @@
+<% extend ('../../layout')%>
+<div class="row" style="padding: 20px;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="panel form-element-padding">
+            <div class="panel-heading">
+                <h4>EDIT Ambulance</h4>
+            </div>
+            <div class="panel-body" style="padding-bottom:30px;">
+                <div class="col-md-12">
+                    <form method="POST" action="/admin/editAmbulance">
+
+                        <div class="form-group">
+                            <label>Ambulance Model</label>
+                            <div>
+                                <input value="<%= ambulance.val().ambulanceModel%>" type="text" class="form-control"
+                                    name="ambulanceModel" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ambulance Registration Number</label>
+                            <div>
+                                <input value="<%= ambulance.val().registrationNumber%>" type="text" class="form-control"
+                                    name="ambulanceRegistrationNumber" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div>
+                                <input value="<%= ambulance.val().id%>" type="hidden" class="form-control"
+                                    name="id" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Driver</label>
+                            <div>
+                                <select name="driver" id="" class="form-control" required>
+                                    <% drivers.forEach(u => { %>
+                                    <% if (ambulance.val().driverId == u.val().phone ){ %>
+                                    <option value="<%= u.val().phone %>" selected> <%= u.val().firstName %>
+                                        <%= u.val().lastName %> </option>
+                                    <% } else {%>
+                                    <option value="<%= u.val().phone %>"><%= u.val().firstName %> <%= u.val().lastName %>
+                                    </option>
+                                    <% } %>
+                                    <% }); %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-block btn-primary" value="SAVE AMBULANCE">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>

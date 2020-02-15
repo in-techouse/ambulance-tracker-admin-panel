@@ -2,329 +2,110 @@
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
-  <meta name="description" content="Miminium Admin Template v.1">
-  <meta name="author" content="Isna Nur Azis">
-  <meta name="keyword" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Smart Bin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ambulance Tracker</title>
 
-  <!-- start: Css -->
-  <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
-
-  <!-- plugins -->
-  <link rel="stylesheet" type="text/css" href="/public/css/plugins/datatables.bootstrap.min.css" />
-  <!-- end: Css -->
-
-  <!-- plugins -->
-  <link rel="stylesheet" type="text/css" href="/public/css/plugins/font-awesome.min.css" />
-  <link rel="stylesheet" type="text/css" href="/public/css/plugins/simple-line-icons.css" />
-  <link rel="stylesheet" type="text/css" href="/public/css/plugins/animate.min.css" />
-  <link rel="stylesheet" type="text/css" href="/public/css/plugins/fullcalendar.min.css" />
+  <!-- Bootstrap core CSS -->
+  <link href="/public/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!--external css-->
+  <link href="/public/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="/public/css/zabuto_calendar.css">
+  <link rel="stylesheet" type="text/css" href="/public/lib/gritter/css/jquery.gritter.css" />
+  <!-- Custom styles for this template -->
   <link href="/public/css/style.css" rel="stylesheet">
-  <!-- end: Css -->
-
-  <link rel="shortcut icon" href="/public/img/logomi.png">
+  <link href="/public/css/style-responsive.css" rel="stylesheet">
+  <script src="/public/lib/chart-master/Chart.js"></script>
 </head>
 
-<body id="mimin" class="dashboard">
-  <%- include ('./shared/hadder') %>
-
-  <div class="container-fluid mimin-wrapper">
+<body>
+  <section id="container">
+    <%- include ('./shared/header') %>
     <%- include ('./shared/sideBar') %>
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <%- content %>
+      </section>
+    </section>
+  </section>
+  <!-- js placed at the end of the document so the pages load faster -->
+  <script src="/public/lib/jquery/jquery.min.js"></script>
 
-    <!-- start: Content -->
-    <div id="content">
-      <div class="panel">
-        <div class="panel-body">
-          <div class="col-md-12 col-sm-12">
-            <h3 class="animated fadeInLeft">SMART BIN, ADMIN DASHBOARD</h3>
-            <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> Lahore, Pakistan</p>
-
-            <ul class="nav navbar-nav">
-              <li><a href="/admin/allusers">USERS</a></li>
-              <li><a href="/admin/allDrivers">DRIVERS</a></li>
-              <li><a href="/admin/allTrucks">TRUCKS</a></li>
-              <li><a href="/admin/addDriver">NEW DRIVER</a></li>
-              <li><a href="/admin/addTruck">NEW TRUCK</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <%- content %>
-    </div>
-  </div>
-
-  <!-- start: Javascript -->
-  <script src="/public/js/jquery.min.js"></script>
-  <script src="/public/js/jquery.ui.min.js"></script>
-  <script src="/public/js/bootstrap.min.js"></script>
-
-
-  <!-- plugins -->
-  <script src="/public/js/plugins/moment.min.js"></script>
-  <script src="/public/js/plugins/fullcalendar.min.js"></script>
-  <script src="/public/js/plugins/jquery.datatables.min.js"></script>
-  <script src="/public/js/plugins/datatables.bootstrap.min.js"></script>
-  <script src="/public/js/plugins/jquery.nicescroll.js"></script>
-  <script src="/public/js/plugins/jquery.vmap.min.js"></script>
-  <script src="/public/js/plugins/maps/jquery.vmap.world.js"></script>
-  <script src="/public/js/plugins/jquery.vmap.sampledata.js"></script>
-  <script src="/public/js/plugins/chart.min.js"></script>
-
-
-  <!-- custom -->
-  <script src="/public/js/main.js"></script>
-  <script src="/public/js/mainScript.js"></script>
-
+  <script src="/public/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script class="include" type="text/javascript" src="/public/lib/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="/public/lib/jquery.scrollTo.min.js"></script>
+  <script src="/public/lib/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="/public/lib/jquery.sparkline.js"></script>
+  <!--common script for all pages-->
+  <script src="/public/lib/common-scripts.js"></script>
+  <script type="text/javascript" src="/public/lib/gritter/js/jquery.gritter.js"></script>
+  <script type="text/javascript" src="/public/lib/gritter-conf.js"></script>
+  <!--script for this page-->
+  <script src="/public/lib/sparkline-chart.js"></script>
+  <script src="/public/lib/zabuto_calendar.js"></script>
   <script type="text/javascript">
-    (function (jQuery) {
-
-      // start: Chart =============
-
-      Chart.defaults.global.pointHitDetectionRadius = 1;
-      Chart.defaults.global.customTooltips = function (tooltip) {
-
-        var tooltipEl = $('#chartjs-tooltip');
-
-        if (!tooltip) {
-          tooltipEl.css({
-            opacity: 0
-          });
-          return;
-        }
-
-        tooltipEl.removeClass('above below');
-        tooltipEl.addClass(tooltip.yAlign);
-
-        var innerHtml = '';
-        if (undefined !== tooltip.labels && tooltip.labels.length) {
-          for (var i = tooltip.labels.length - 1; i >= 0; i--) {
-            innerHtml += [
-              '<div class="chartjs-tooltip-section">',
-              '   <span class="chartjs-tooltip-key" style="background-color:' + tooltip.legendColors[i].fill + '"></span>',
-              '   <span class="chartjs-tooltip-value">' + tooltip.labels[i] + '</span>',
-              '</div>'
-            ].join('');
-          }
-          tooltipEl.html(innerHtml);
-        }
-
-        tooltipEl.css({
-          opacity: 1,
-          left: tooltip.chart.canvas.offsetLeft + tooltip.x + 'px',
-          top: tooltip.chart.canvas.offsetTop + tooltip.y + 'px',
-          fontFamily: tooltip.fontFamily,
-          fontSize: tooltip.fontSize,
-          fontStyle: tooltip.fontStyle
-        });
-      };
-      var randomScalingFactor = function () {
-        return Math.round(Math.random() * 100);
-      };
-      var lineChartData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-          label: "My First dataset",
-          fillColor: "rgba(21,186,103,0.4)",
-          strokeColor: "rgba(220,220,220,1)",
-          pointColor: "rgba(66,69,67,0.3)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(220,220,220,1)",
-          data: [18, 9, 5, 7, 4.5, 4, 5, 4.5, 6, 5.6, 7.5]
-        }, {
-          label: "My Second dataset",
-          fillColor: "rgba(21,113,186,0.5)",
-          strokeColor: "rgba(151,187,205,1)",
-          pointColor: "rgba(151,187,205,1)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(151,187,205,1)",
-          data: [4, 7, 5, 7, 4.5, 4, 5, 4.5, 6, 5.6, 7.5]
-        }]
-      };
-
-      var doughnutData = [
-        {
-          value: 300,
-          color: "#129352",
-          highlight: "#15BA67",
-          label: "Alfa"
-        },
-        {
-          value: 50,
-          color: "#1AD576",
-          highlight: "#15BA67",
-          label: "Beta"
-        },
-        {
-          value: 100,
-          color: "#FDB45C",
-          highlight: "#15BA67",
-          label: "Gamma"
-        },
-        {
-          value: 40,
-          color: "#0F5E36",
-          highlight: "#15BA67",
-          label: "Peta"
-        },
-        {
-          value: 120,
-          color: "#15A65D",
-          highlight: "#15BA67",
-          label: "X"
-        }
-
-      ];
-
-
-      var doughnutData2 = [
-        {
-          value: 100,
-          color: "#129352",
-          highlight: "#15BA67",
-          label: "Alfa"
-        },
-        {
-          value: 250,
-          color: "#FF6656",
-          highlight: "#FF6656",
-          label: "Beta"
-        },
-        {
-          value: 100,
-          color: "#FDB45C",
-          highlight: "#15BA67",
-          label: "Gamma"
-        },
-        {
-          value: 40,
-          color: "#FD786A",
-          highlight: "#15BA67",
-          label: "Peta"
-        },
-        {
-          value: 120,
-          color: "#15A65D",
-          highlight: "#15BA67",
-          label: "X"
-        }
-
-      ];
-
-      var barChartData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [
-          {
-            label: "My First dataset",
-            fillColor: "rgba(21,186,103,0.4)",
-            strokeColor: "rgba(220,220,220,0.8)",
-            highlightFill: "rgba(21,186,103,0.2)",
-            highlightStroke: "rgba(21,186,103,0.2)",
-            data: [65, 59, 80, 81, 56, 55, 40]
-          },
-          {
-            label: "My Second dataset",
-            fillColor: "rgba(21,113,186,0.5)",
-            strokeColor: "rgba(151,187,205,0.8)",
-            highlightFill: "rgba(21,113,186,0.2)",
-            highlightStroke: "rgba(21,113,186,0.2)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-          }
-        ]
-      };
-
-
-      //  end:  Chart =============
-
-      // start: Calendar =========
-      $('.dashboard .calendar').fullCalendar({
-        header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'month,agendaWeek,agendaDay'
-        },
-        defaultDate: '2015-02-12',
-        businessHours: true, // display business hours
-        editable: true,
-        events: [
-          {
-            title: 'Business Lunch',
-            start: '2015-02-03T13:00:00',
-            constraint: 'businessHours'
-          },
-          {
-            title: 'Meeting',
-            start: '2015-02-13T11:00:00',
-            constraint: 'availableForMeeting', // defined below
-            color: '#20C572'
-          },
-          {
-            title: 'Conference',
-            start: '2015-02-18',
-            end: '2015-02-20'
-          },
-          {
-            title: 'Party',
-            start: '2015-02-29T20:00:00'
-          },
-
-          // areas where "Meeting" must be dropped
-          {
-            id: 'availableForMeeting',
-            start: '2015-02-11T10:00:00',
-            end: '2015-02-11T16:00:00',
-            rendering: 'background'
-          },
-          {
-            id: 'availableForMeeting',
-            start: '2015-02-13T10:00:00',
-            end: '2015-02-13T16:00:00',
-            rendering: 'background'
-          },
-
-          // red areas where no events can be dropped
-          {
-            start: '2015-02-24',
-            end: '2015-02-28',
-            overlap: false,
-            rendering: 'background',
-            color: '#FF6656'
-          },
-          {
-            start: '2015-02-06',
-            end: '2015-02-08',
-            overlap: true,
-            rendering: 'background',
-            color: '#FF6656'
-          }
-        ]
-      });
-      // end : Calendar==========
-
-      // start: Maps============
-
-      jQuery('.maps').vectorMap({
-        map: 'world_en',
-        backgroundColor: null,
-        color: '#fff',
-        hoverOpacity: 0.7,
-        selectedColor: '#666666',
-        enableZoom: true,
-        showTooltip: true,
-        values: sample_data,
-        scaleColors: ['#C8EEFF', '#006491'],
-        normalizeFunction: 'polynomial'
+    $(document).ready(function () {
+      var unique_id = $.gritter.add({
+        // (string | mandatory) the heading of the notification
+        title: 'Welcome to Dashio!',
+        // (string | mandatory) the text inside the notification
+        text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
+        // (string | optional) the image to display on the left
+        image: '/public/img/ui-sam.jpg',
+        // (bool | optional) if you want it to fade out on its own or just sit there
+        sticky: false,
+        // (int | optional) the time you want it to be alive for before fading out
+        time: 8000,
+        // (string | optional) the class name you want to apply to that specific message
+        class_name: 'my-sticky-class'
       });
 
-      // end: Maps==============
-
-    })(jQuery);
+      return false;
+    });
   </script>
-  <!-- end: Javascript -->
+  <script type="application/javascript">
+    $(document).ready(function () {
+      $("#date-popover").popover({
+        html: true,
+        trigger: "manual"
+      });
+      $("#date-popover").hide();
+      $("#date-popover").click(function (e) {
+        $(this).hide();
+      });
+
+      $("#my-calendar").zabuto_calendar({
+        action: function () {
+          return myDateFunction(this.id, false);
+        },
+        action_nav: function () {
+          return myNavFunction(this.id);
+        },
+        ajax: {
+          url: "show_data.php?action=1",
+          modal: true
+        },
+        legend: [{
+          type: "text",
+          label: "Special event",
+          badge: "00"
+        },
+        {
+          type: "block",
+          label: "Regular event",
+        }
+        ]
+      });
+    });
+
+    function myNavFunction(id) {
+      $("#date-popover").hide();
+      var nav = $("#" + id).data("navigation");
+      var to = $("#" + id).data("to");
+      console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+    }
+  </script>
 </body>
 
 </html>

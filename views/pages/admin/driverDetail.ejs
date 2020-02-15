@@ -1,11 +1,11 @@
-<% extend ('../layout')%>
+<% extend ('../../layout')%>
 <div class="row" style="padding:20px">
     <div class="col-md-12">
         <div class="panel box-v1">
             <div class="panel-heading bg-white border-none">
-                <div class="col-md-12 col-sm-12 col-xs-12 text-left padding-0">
-                    <h1 class="text-center" style="text-transform: uppercase;">Driver Details</h1>
-                </div>
+                <!-- <div class="col-md-12 col-sm-12 col-xs-12 text-left padding-0"> -->
+                <h1 class="text-center" style="text-transform: uppercase;">Driver Details</h1>
+                <!-- </div> -->
             </div>
             <div class="panel-body text-left" style="padding-top: 10px;">
                 <div class="row">
@@ -14,24 +14,23 @@
                         <img src="<%= driver.val().image %>" class="img-circle avatar"
                             alt="<%= driver.val().firstName%>" style="width: 180px; height: 180px;" />
                         <% } else {%>
-                        <img src="/public/img/avatar.jpg" class="img-circle avatar" alt="<%= driver.val().firstName%>"
+                        <img src="/public/img/user.jpg" class="img-circle avatar" alt="<%= driver.val().firstName%>"
                             style="width: 180px; height: 180px;" />
                         <%}%>
                     </div>
                     <div class="col-md-8">
                         <h3><b style="margin-right: 30px;">NAME: </b><%= driver.val().firstName%>
                         <%= driver.val().lastName%></h3>
-                        <h3><b style="margin-right: 30px;">ID: </b><%= driver.val().id%></h3>
                         <h3><b style="margin-right: 30px;">EMAIL: </b><%= driver.val().email%></h3>
                         <h3><b style="margin-right: 30px;">LICENSE NUMBER: </b><%= driver.val().licenseNumber%></h3>
-                        <h3><b style="margin-right: 30px;">PHONE NUMBER: </b><%= driver.val().phoneNumber%></h3>
+                        <h3><b style="margin-right: 30px;">PHONE NUMBER: </b><%= driver.val().phone%></h3>
                     </div>
                 </div>
                 <div class="row">
 
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        <a href="/admin/editdriver?id=<%= driver.val().id%>" class="btn btn-warning btn-block">Edit</a>
+                        <a href="/admin/editdriver?id=<%= driver.val().phone%>" class="btn btn-warning btn-block">Edit</a>
                     </div>
                     <div class="col-md-4"></div>
                 </div>
