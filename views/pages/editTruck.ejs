@@ -1,0 +1,51 @@
+<% extend ('../layout')%>
+<div class="row" style="padding: 20px">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="panel form-element-padding">
+            <div class="panel-heading">
+                <h4>Edit Truck</h4>
+            </div>
+            <div class="panel-body" style="padding-bottom:30px;">
+                <form method="POST" action="/admin/edittruck">
+
+                    <div class="form-group">
+                        <label for="">Model</label>
+                        <input type="text" name="model" value="<%= truck.val().truckModel%>" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Registration Number</label>
+                        <input type="text" name="registration" value="<%= truck.val().registrationNumber%>"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Capacity</label>
+                        <input type="text" name="capacity" value="<%= truck.val().truckCapacity%>" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Driver</label>
+
+                        <select name="driver" id="" class="form-control">
+                            <% drivers.forEach(u => { %>
+                            <% if (truck.val().driverId == u.val().id){ %>
+                            <option value="<%= u.val().id %>" selected> <%= u.val().firstName %> <%= u.val().lastName %> </option>
+                            <% } else {%>
+                            <option value="<%= u.val().id %>"> <%= u.val().firstName %> <%= u.val().lastName %> </option>
+                            <% } %>
+                            <% }); %>
+                        </select>
+                    </div>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="id" value="<%= truck.val().id%>" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-block btn-primary">
+            </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div class="col-md-3"></div>
+</div>

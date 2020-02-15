@@ -1,0 +1,7 @@
+/node_modules
+package-lock.json
+.env
+public/.DS_Store
+.DS_Store
+yarn.lock
+switcher_backup.env

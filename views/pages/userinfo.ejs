@@ -1,0 +1,32 @@
+<% extend ('../layout')%>
+<div class="row" style="padding:20px">
+    <div class="col-md-12">
+        <div class="panel box-v1">
+            <div class="panel-heading bg-white border-none">
+                <div class="col-md-12 col-sm-12 col-xs-12 text-left padding-0">
+                    <h1 class="text-center" style="text-transform: uppercase;">User Details</h1>
+                </div>
+            </div>
+            <div class="panel-body text-left" style="padding-top: 10px;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <% if (user.val().image && user.val().image.length > 0) {%>
+                        <img src="<%= user.val().image %>" class="img-circle avatar"
+                            alt="<%= user.val().firstName%>" style="width: 180px; height: 180px;" />
+                        <% } else {%>
+                        <img src="/public/img/avatar.jpg" class="img-circle avatar" alt="<%= user.val().firstName%>"
+                            style="width: 180px; height: 180px;" />
+                        <%}%>
+                    </div>
+                    <div class="col-md-8">
+                        <h3><b style="margin-right: 30px;">NAME: </b><%= user.val().firstName%>
+                        <%= user.val().lastName%></h3>
+                        <h3><b style="margin-right: 30px;">ID: </b><%= user.val().id%></h3>
+                        <h3><b style="margin-right: 30px;">EMAIL: </b><%= user.val().email%></h3>
+                        <h3><b style="margin-right: 30px;">PHONE NUMBER: </b><%= user.val().phoneNumber%></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

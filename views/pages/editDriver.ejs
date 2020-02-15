@@ -1,0 +1,60 @@
+<% extend ('../layout')%>
+<div class="row" style="padding: 20px">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="panel form-element-padding">
+            <div class="panel-heading">
+                <h4>Edit Driver</h4>
+            </div>
+            <div class="panel-body" style="padding-bottom:30px;">
+                <form method="POST" action="/admin/editdriver">
+
+                    <div class="form-group">
+                        <label>Driver First Name</label>
+                        <div>
+                            <input value="<%= driver.val().firstName %>" type="text" class="form-control" name="driverFirstName" required minlength="3" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Driver Last Name</label>
+                        <div>
+                            <input value="<%= driver.val().lastName %>" type="text" class="form-control" name="driverLastName" required minlength="3" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Driver Phone Number</label>
+                        <div>
+                            <input value="<%= driver.val().phoneNumber %>" type="tel" class="form-control" name="driverPhoneNumber" required minlength="11"
+                                maxlength="11" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Driver License Number</label>
+                        <div>
+                            <input value="<%= driver.val().licenseNumber %>" type="tel" class="form-control" name="driverLicenseNumber" required
+                                minlength="7" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Driver Email</label>
+                        <div>
+                            <input readonly value="<%= driver.val().email %>" type="email" class="form-control" name="driverEmail" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="id" value="<%= driver.val().id%>" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-block btn-primary" value="UPDATE">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-3"></div>
+</div>
