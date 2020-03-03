@@ -40,7 +40,7 @@ router.get("/", function(req, res) {
               firebase
                 .database()
                 .ref()
-                .child("Bookings")
+                .child("Cases")
                 .once("value")
                 .then(bookings => {
                   count.bookings = bookings.numChildren();
