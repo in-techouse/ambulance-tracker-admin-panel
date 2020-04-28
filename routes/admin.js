@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var firebase = require("firebase");
 
-router.get("/", function(req, res) {
+router.get("/", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -10,7 +10,7 @@ router.get("/", function(req, res) {
     users: 0,
     drivers: 0,
     ambulances: 0,
-    bookings: 0
+    bookings: 0,
   };
   firebase
     .database()
@@ -19,7 +19,7 @@ router.get("/", function(req, res) {
     .orderByChild("type")
     .equalTo(0)
     .once("value")
-    .then(users => {
+    .then((users) => {
       count.users = users.numChildren();
       firebase
         .database()
@@ -28,37 +28,37 @@ router.get("/", function(req, res) {
         .orderByChild("type")
         .equalTo(1)
         .once("value")
-        .then(drivers => {
+        .then((drivers) => {
           count.drivers = drivers.numChildren();
           firebase
             .database()
             .ref()
             .child("Ambulances")
             .once("value")
-            .then(ambulances => {
+            .then((ambulances) => {
               count.ambulances = ambulances.numChildren();
               firebase
                 .database()
                 .ref()
                 .child("Cases")
                 .once("value")
-                .then(bookings => {
+                .then((bookings) => {
                   count.bookings = bookings.numChildren();
                   res.render("pages/admin/dashboard", {
                     count: count,
                     session: req.session,
-                    name: "dashboard"
+                    name: "dashboard",
                   });
                 });
             });
         });
     })
-    .catch(e => {
+    .catch((e) => {
       res.render("pages/admin/dashboard", { count: count, name: "dashboard" });
     });
 });
 
-router.get("/users", function(req, res) {
+router.get("/users", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -70,24 +70,24 @@ router.get("/users", function(req, res) {
     .orderByChild("type")
     .equalTo(0)
     .once("value")
-    .then(data => {
+    .then((data) => {
       users = data;
       res.render("pages/admin/users", {
         users: users,
         session: req.session,
-        name: "users"
+        name: "users",
       });
     })
-    .catch(e => {
+    .catch((e) => {
       res.render("pages/admin/users", {
         users: users,
         session: req.session,
-        name: "users"
+        name: "users",
       });
     });
 });
 
-router.get("/userDetail", function(req, res) {
+router.get("/userDetail", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -100,30 +100,30 @@ router.get("/userDetail", function(req, res) {
     .child("Users")
     .child(id)
     .once("value")
-    .then(user => {
+    .then((user) => {
       res.render("pages/admin/userDetail", {
         user: user,
         session: req.session,
-        name: "user"
+        name: "user",
       });
     })
-    .catch(e => {
+    .catch((e) => {
       res.redirect("/admin/users");
     });
 });
 
-router.get("/addDriver", function(req, res) {
+router.get("/addDriver", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
   res.render("pages/admin/addDriver", {
     error: "",
     session: req.session,
-    name: "Add Driver"
+    name: "Add Driver",
   });
 });
 
-router.post("/addDriver", function(req, res) {
+router.post("/addDriver", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -136,7 +136,7 @@ router.post("/addDriver", function(req, res) {
     longitude: 0,
     phone: req.body.driverPhoneNumber,
     licenseNumber: req.body.driverLicenseNumber,
-    type: 1
+    type: 1,
   };
   firebase
     .database()
@@ -144,19 +144,19 @@ router.post("/addDriver", function(req, res) {
     .child("Users")
     .child(driver.phone)
     .set(driver)
-    .then(d => {
+    .then((d) => {
       res.redirect("/admin/drivers");
     })
-    .catch(e => {
+    .catch((e) => {
       res.render("pages/admin/addDriver", {
         error: "Something went wrong. Please try again later",
         session: req.session,
-        name: "Add Driver"
+        name: "Add Driver",
       });
     });
 });
 
-router.get("/drivers", function(req, res) {
+router.get("/drivers", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -168,24 +168,24 @@ router.get("/drivers", function(req, res) {
     .orderByChild("type")
     .equalTo(1)
     .once("value")
-    .then(data => {
+    .then((data) => {
       drivers = data;
       res.render("pages/admin/drivers", {
         drivers: drivers,
         session: req.session,
-        name: "drivers"
+        name: "drivers",
       });
     })
-    .catch(e => {
+    .catch((e) => {
       res.render("pages/admin/drivers", {
         drivers: drivers,
         session: req.session,
-        name: "drivers"
+        name: "drivers",
       });
     });
 });
 
-router.get("/driverdetail", function(req, res) {
+router.get("/driverdetail", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -198,20 +198,20 @@ router.get("/driverdetail", function(req, res) {
     .child("Users")
     .child(id)
     .once("value")
-    .then(data => {
+    .then((data) => {
       driver = data;
       res.render("pages/admin/driverDetail", {
         driver: driver,
         session: req.session,
-        name: "driverDetail"
+        name: "driverDetail",
       });
     })
-    .catch(error => {
+    .catch((error) => {
       res.redirect("/admin/allDrivers");
     });
 });
 
-router.get("/editdriver", function(req, res) {
+router.get("/editdriver", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -224,20 +224,20 @@ router.get("/editdriver", function(req, res) {
     .child("Users")
     .child(id)
     .once("value")
-    .then(data => {
+    .then((data) => {
       let driver = data;
       res.render("pages/admin/editDriver", {
         driver: driver,
         session: req.session,
-        name: "editDriver"
+        name: "editDriver",
       });
     })
-    .catch(error => {
+    .catch((error) => {
       res.redirect("/admin/drivers");
     });
 });
 
-router.post("/editdriver", function(req, res) {
+router.post("/editdriver", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -246,7 +246,7 @@ router.post("/editdriver", function(req, res) {
     firstName: req.body.driverFirstName,
     lastName: req.body.driverLastName,
     licenseNumber: req.body.driverLicenseNumber,
-    phone: req.body.driverPhoneNumber
+    phone: req.body.driverPhoneNumber,
   };
   firebase
     .database()
@@ -254,7 +254,7 @@ router.post("/editdriver", function(req, res) {
     .child("Users")
     .child(updatedDriver.phone)
     .once("value")
-    .then(data => {
+    .then((data) => {
       let driver = data.val();
       driver.email = updatedDriver.email;
       driver.licenseNumber = updatedDriver.licenseNumber;
@@ -266,16 +266,16 @@ router.post("/editdriver", function(req, res) {
         .child("Users")
         .child(driver.phone)
         .set(driver)
-        .then(function() {
+        .then(function () {
           res.redirect("/admin/drivers");
         });
     })
-    .catch(error => {
+    .catch((error) => {
       res.redirect("/admin/drivers");
     });
 });
 
-router.get("/addAmbulance", function(req, res) {
+router.get("/addAmbulance", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -287,33 +287,29 @@ router.get("/addAmbulance", function(req, res) {
     .orderByChild("type")
     .equalTo(1)
     .once("value")
-    .then(data => {
+    .then((data) => {
       drivers = data;
       res.render("pages/admin/addAmbulance", {
         drivers: drivers,
         session: req.session,
-        name: "addAmbulance"
+        name: "addAmbulance",
       });
     })
-    .catch(e => {
+    .catch((e) => {
       res.redirect("/admin/ambulances");
     });
 });
 
-router.post("/addAmbulance", function(req, res) {
+router.post("/addAmbulance", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
-  let id = firebase
-    .database()
-    .ref()
-    .child("Trucks")
-    .push().key;
+  let id = firebase.database().ref().child("Trucks").push().key;
   let ambulance = {
     id: id,
     driverId: req.body.driver,
     ambulanceModel: req.body.ambulanceModel,
-    registrationNumber: req.body.ambulanceRegistrationNumber
+    registrationNumber: req.body.ambulanceRegistrationNumber,
   };
   firebase
     .database()
@@ -321,15 +317,15 @@ router.post("/addAmbulance", function(req, res) {
     .child("Ambulances")
     .child(ambulance.id)
     .set(ambulance)
-    .then(function() {
+    .then(function () {
       res.redirect("/admin/ambulances");
     })
-    .catch(function(error) {
+    .catch(function (error) {
       res.redirect("/admin/ambulances");
     });
 });
 
-router.get("/ambulances", function(req, res) {
+router.get("/ambulances", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -339,24 +335,24 @@ router.get("/ambulances", function(req, res) {
     .ref()
     .child("Ambulances")
     .once("value")
-    .then(data => {
+    .then((data) => {
       ambulances = data;
       res.render("pages/admin/ambulances", {
         ambulances: ambulances,
         session: req.session,
-        name: "ambulances"
+        name: "ambulances",
       });
     })
-    .catch(e => {
+    .catch((e) => {
       res.render("pages/admin/ambulances", {
         trucks: trucks,
         session: req.session,
-        name: "ambulances"
+        name: "ambulances",
       });
     });
 });
 
-router.get("/ambulanceDetail", function(req, res) {
+router.get("/ambulanceDetail", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -367,7 +363,7 @@ router.get("/ambulanceDetail", function(req, res) {
     .child("Ambulances")
     .child(id)
     .once("value")
-    .then(data => {
+    .then((data) => {
       let ambulance = data;
       let did = ambulance.val().driverId;
       firebase
@@ -376,22 +372,22 @@ router.get("/ambulanceDetail", function(req, res) {
         .child("Users")
         .child(did)
         .once("value")
-        .then(driverData => {
+        .then((driverData) => {
           let driver = driverData;
           res.render("pages/admin/ambulanceDetail", {
             ambulance: ambulance,
             driver: driver,
             session: req.session,
-            name: "ambulanceDetail"
+            name: "ambulanceDetail",
           });
         });
     })
-    .catch(error => {
+    .catch((error) => {
       res.redirect("/admin/ambulances");
     });
 });
 
-router.get("/editAmbulance", function(req, res) {
+router.get("/editAmbulance", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -403,7 +399,7 @@ router.get("/editAmbulance", function(req, res) {
     .child("Ambulances")
     .child(id)
     .once("value")
-    .then(data => {
+    .then((data) => {
       let ambulance = data;
       firebase
         .database()
@@ -412,22 +408,22 @@ router.get("/editAmbulance", function(req, res) {
         .orderByChild("type")
         .equalTo(1)
         .once("value")
-        .then(driverData => {
+        .then((driverData) => {
           drivers = driverData;
           res.render("pages/admin/editAmbulance", {
             ambulance: ambulance,
             drivers: drivers,
             session: req.session,
-            name: "editAmbulance"
+            name: "editAmbulance",
           });
         });
     })
-    .catch(error => {
+    .catch((error) => {
       res.redirect("/admin/ambulances");
     });
 });
 
-router.post("/editAmbulance", function(req, res) {
+router.post("/editAmbulance", function (req, res) {
   if (!req.session.isAdmin) {
     res.redirect("/");
   }
@@ -435,7 +431,7 @@ router.post("/editAmbulance", function(req, res) {
     id: req.body.id,
     driverId: req.body.driver,
     ambulanceModel: req.body.ambulanceModel,
-    registrationNumber: req.body.ambulanceRegistrationNumber
+    registrationNumber: req.body.ambulanceRegistrationNumber,
   };
   firebase
     .database()
@@ -443,10 +439,10 @@ router.post("/editAmbulance", function(req, res) {
     .child("Ambulances")
     .child(ambulance.id)
     .set(ambulance)
-    .then(function() {
+    .then(function () {
       res.redirect("/admin/ambulances");
     })
-    .catch(error => {
+    .catch((error) => {
       res.redirect("/admin/ambulances");
     });
 });
