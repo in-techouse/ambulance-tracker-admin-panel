@@ -2,8 +2,11 @@ var express = require("express");
 var router = express.Router();
 var firebase = require("firebase");
 
+// Dashboard Action
 router.get("/", function (req, res) {
   if (!req.session.isAdmin) {
+    // Check session.
+    // If admin is not login, moved to login page.
     res.redirect("/");
   }
   let count = {
@@ -12,14 +15,16 @@ router.get("/", function (req, res) {
     ambulances: 0,
     bookings: 0,
   };
+  // Get all customers, type => Customer
   firebase
     .database()
     .ref()
     .child("Users")
     .orderByChild("type")
     .equalTo(0)
-    .once("value")
+    .once("value") // Android => ValueEventListener, to read data. Web => Once("value"), to read data.
     .then((users) => {
+      // Get all customers success case.
       count.users = users.numChildren();
       firebase
         .database()
@@ -54,12 +59,16 @@ router.get("/", function (req, res) {
         });
     })
     .catch((e) => {
+      // Get all records failure case.
       res.render("pages/admin/dashboard", { count: count, name: "dashboard" });
     });
 });
 
+// Display all users action
 router.get("/users", function (req, res) {
   if (!req.session.isAdmin) {
+    // Check session.
+    // If admin is not login, moved to login page.
     res.redirect("/");
   }
   let users = [];
